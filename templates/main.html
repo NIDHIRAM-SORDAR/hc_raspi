@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+   <title>Manual Mode</title>
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+
+<body>
+   <h1>Manual Mode Page</h1>
+   <a href = "{{ url_for('index')}}" class="btn btn-sm btn-primary" role="button" > Home </a>
+   {% for mode in manual_modes %}
+   <h2>{{ manual_modes[mode].name }}
+   {% if manual_modes[mode].state == 'off' %}
+      is currently <strong>{{manual_modes[mode].state}}</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/manual/{{mode}}" class="btn btn-block btn-lg btn-primary" role="button">Turn On</a></div></div>
+   {% else %}
+      is recently <strong>{{manual_modes[mode].state}}</strong></h2><div class="row"><div class="col-md-2">
+      <a href="/manual/{{mode}}" class="btn btn-block btn-lg btn-default" role="button">Run Again</a></div></div>
+   {% endif %}
+   {% endfor %}
+   {% if message %}
+      <h2>{{ message }}</h2>
+   {% endif %}
+   {% if motor_status %}
+   <h2>{{ motor_status }}</h2>
+   {% endif %}
+</body>
+</html>
